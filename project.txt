@@ -1,0 +1,94 @@
+CREATE DATABASE SMSproject;
+
+USE SMSproject;
+
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_name VARCHAR(255) NOT NULL,
+    date_of_birth DATE,
+    email VARCHAR(255)
+);
+
+CREATE TABLE teachers (
+    teacher_id INT AUTO_INCREMENT PRIMARY KEY,
+    teacher_name VARCHAR(255) NOT NULL,
+    subject VARCHAR(255),
+    email VARCHAR(255)
+);
+
+CREATE TABLE classes (
+    class_id INT AUTO_INCREMENT PRIMARY KEY,
+    class_name VARCHAR(255) NOT NULL,
+    teacher_id INT,
+    schedule_time TIME,
+    room_number VARCHAR(50),
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
+);
+
+CREATE TABLE class_students (
+    class_id INT,
+    student_id INT,
+    enrollment_date DATE,
+    PRIMARY KEY (class_id, student_id),
+    FOREIGN KEY (class_id) REFERENCES classes(class_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+);
+
+
+
+-- Insert sample students
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Amit', '2005-03-15', 'amit@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Ravi', '2006-07-22', 'ravi@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Priya', '2007-12-30', 'priya@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Anita', '2005-11-07', 'anita@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Rajesh', '2005-04-20', 'rajesh@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Sneha', '2006-06-18', 'sneha@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Sunil', '2007-09-25', 'sunil@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Kavita', '2005-08-15', 'kavita@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Vikram', '2006-10-12', 'vikram@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Rekha', '2005-02-28', 'rekha@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Arjun', '2006-01-11', 'arjun@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Lakshmi', '2005-05-09', 'lakshmi@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Suresh', '2007-03-22', 'suresh@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Meena', '2006-12-05', 'meena@gmail.com');
+INSERT INTO students (student_name, date_of_birth, email) VALUES ('Ajay', '2007-08-16', 'ajay@gmail.com');
+
+-- Insert sample teachers
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Mr. Anand', 'Mathematics', 'anand@gmail.com');
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Ms. Bhavitha', 'English', 'bhavitha@gmail.com');
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Mrs. Chandana', 'Science', 'chandu@gmail.com');
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Mr. Dileep', 'History', 'dileep@gmail.com');
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Ms. Eshwar', 'Geography', 'eshwar@gmail.com');
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Mr. phani', 'Physics', 'phani@gmail.com');
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Mrs. Gayatri', 'Chemistry', 'gayatri@gmail.com');
+INSERT INTO teachers (teacher_name, subject, email) VALUES ('Ms. Harika', 'Biology', 'harika@gmail.com');
+
+-- Insert sample classes
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('Math 101', 1, '09:00:00', 'Room 101');
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('English 101', 2, '10:00:00', 'Room 102');
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('Science 101', 3, '11:00:00', 'Room 103');
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('History 101', 4, '12:00:00', 'Room 104');
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('Geography 101', 5, '13:00:00', 'Room 105');
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('Physics 101', 6, '14:00:00', 'Room 106');
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('Chemistry 101', 7, '15:00:00', 'Room 107');
+INSERT INTO classes (class_name, teacher_id, schedule_time, room_number) VALUES ('Biology 101', 8, '16:00:00', 'Room 108');
+
+-- Assign students to classes with enrollment dates
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (1, 1, '2023-01-15');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (1, 2, '2023-01-16');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (2, 3, '2023-01-17');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (3, 4, '2023-01-18');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (2, 5, '2023-01-19');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (3, 6, '2023-01-20');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (4, 7, '2023-01-21');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (4, 8, '2023-01-22');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (5, 9, '2023-01-23');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (5, 10, '2023-01-24');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (6, 11, '2023-01-25');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (6, 12, '2023-01-26');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (7, 13, '2023-01-27');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (7, 14, '2023-01-28');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (8, 15, '2023-01-29');
+INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (8, 1, '2023-01-30');
+
+

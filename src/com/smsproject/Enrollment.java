@@ -1,33 +1,31 @@
 package com.smsproject;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Student {
-    public void addStudent(String name, String dob, String email) throws SQLException {
-        String sql = "INSERT INTO students (student_name, date_of_birth, email) VALUES (?, ?, ?)";
+public class Enrollment {
+    public void enrollStudent(int classId, int studentId, String enrollmentDate) throws SQLException {
+        String sql = "INSERT INTO class_students (class_id, student_id, enrollment_date) VALUES (?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, name);
-            stmt.setDate(2, java.sql.Date.valueOf(dob));
-            stmt.setString(3, email);
+            stmt.setInt(1, classId);
+            stmt.setInt(2, studentId);
+            stmt.setDate(3, java.sql.Date.valueOf(enrollmentDate));
             stmt.executeUpdate();
         }
     }
 
-    public void listStudents() throws SQLException {
-        String sql = "SELECT * FROM students";
+    public void listEnrollments() throws SQLException {
+        String sql = "SELECT * FROM class_students";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
+                System.out.println("Class ID: " + rs.getInt("class_id"));
                 System.out.println("Student ID: " + rs.getInt("student_id"));
-                System.out.println("Student Name: " + rs.getString("student_name"));
-                System.out.println("Date of Birth: " + rs.getDate("date_of_birth"));
-                System.out.println("Email: " + rs.getString("email"));
+                System.out.println("Enrollment Date: " + rs.getDate("enrollment_date"));
                 System.out.println("---------------------------");
             }
         }
